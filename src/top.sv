@@ -99,6 +99,9 @@ logic [7:0] L0_sseg_digit_n_a0;
 // For $sseg_segment_n.
 logic [6:0] L0_sseg_segment_n_a0;
 
+// For /fpga_pins/fpga$btn.
+logic [3:0] FpgaPins_Fpga_btn_a0;
+
 // For /fpga_pins/fpga$cnt.
 logic [3:0] FpgaPins_Fpga_cnt_a0,
             FpgaPins_Fpga_cnt_a1;
@@ -109,8 +112,17 @@ logic [3:0] FpgaPins_Fpga_cntbtn_a0;
 // For /fpga_pins/fpga$digit.
 logic [3:0] FpgaPins_Fpga_digit_a0;
 
+// For /fpga_pins/fpga$ones.
+logic [6:0] FpgaPins_Fpga_ones_a0;
+
 // For /fpga_pins/fpga$reset.
 logic FpgaPins_Fpga_reset_a0;
+
+// For /fpga_pins/fpga$sel_digit.
+logic FpgaPins_Fpga_sel_digit_a0;
+
+// For /fpga_pins/fpga$tens.
+logic [6:0] FpgaPins_Fpga_tens_a0;
 
 
 
@@ -171,14 +183,22 @@ logic FpgaPins_Fpga_reset_a0;
          // Scope: /fpga
          //
          if (1) begin : \/fpga 
+            (* keep *) logic [3:0] \//@0$btn ;
+            assign \//@0$btn = FpgaPins_Fpga_btn_a0;
             (* keep *) logic [3:0] \//@0$cnt ;
             assign \//@0$cnt = FpgaPins_Fpga_cnt_a0;
             (* keep *) logic [3:0] \//@0$cntbtn ;
             assign \//@0$cntbtn = FpgaPins_Fpga_cntbtn_a0;
             (* keep *) logic [3:0] \//@0$digit ;
             assign \//@0$digit = FpgaPins_Fpga_digit_a0;
+            (* keep *) logic [6:0] \//@0$ones ;
+            assign \//@0$ones = FpgaPins_Fpga_ones_a0;
             (* keep *) logic  \//@0$reset ;
             assign \//@0$reset = FpgaPins_Fpga_reset_a0;
+            (* keep *) logic  \//@0$sel_digit ;
+            assign \//@0$sel_digit = FpgaPins_Fpga_sel_digit_a0;
+            (* keep *) logic [6:0] \//@0$tens ;
+            assign \//@0$tens = FpgaPins_Fpga_tens_a0;
          end
       end
 
@@ -228,12 +248,12 @@ logic FpgaPins_Fpga_reset_a0;
             
                assign FpgaPins_Fpga_cnt_a0[3:0] = FpgaPins_Fpga_reset_a0 ? 0 : (FpgaPins_Fpga_cnt_a1 + ui_in[0]);
             
-               //$btn[3:0] = *ui_in[3:1];
+               assign FpgaPins_Fpga_btn_a0[3:0] = ui_in[3:1];
             
-               //$sel_digit = *clk;
+               assign FpgaPins_Fpga_sel_digit_a0 = clk;
             
-               //$tens[6:0] = 7'b0000110;
-               //$ones[6:0] = 7'b1001111;
+               assign FpgaPins_Fpga_tens_a0[6:0] = 7'b0000110;
+               assign FpgaPins_Fpga_ones_a0[6:0] = 7'b1001111;
                assign FpgaPins_Fpga_digit_a0[3:0] = FpgaPins_Fpga_cnt_a0[3:0];
             
                assign uo_out[7:0] =
