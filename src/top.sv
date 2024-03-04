@@ -115,17 +115,8 @@ logic [3:0] FpgaPins_Fpga_COUNT_cntbtn_a0;
 // For /fpga_pins/fpga|count$digit.
 logic [3:0] FpgaPins_Fpga_COUNT_digit_a0;
 
-// For /fpga_pins/fpga|count$ones.
-logic [6:0] FpgaPins_Fpga_COUNT_ones_a0;
-
 // For /fpga_pins/fpga|count$reset.
 logic FpgaPins_Fpga_COUNT_reset_a0;
-
-// For /fpga_pins/fpga|count$sel_digit.
-logic FpgaPins_Fpga_COUNT_sel_digit_a0;
-
-// For /fpga_pins/fpga|count$tens.
-logic [6:0] FpgaPins_Fpga_COUNT_tens_a0;
 
 
 
@@ -207,14 +198,8 @@ logic [6:0] FpgaPins_Fpga_COUNT_tens_a0;
                assign \///@0$cntbtn = FpgaPins_Fpga_COUNT_cntbtn_a0;
                (* keep *) logic [3:0] \///@0$digit ;
                assign \///@0$digit = FpgaPins_Fpga_COUNT_digit_a0;
-               (* keep *) logic [6:0] \///@0$ones ;
-               assign \///@0$ones = FpgaPins_Fpga_COUNT_ones_a0;
                (* keep *) logic  \///@0$reset ;
                assign \///@0$reset = FpgaPins_Fpga_COUNT_reset_a0;
-               (* keep *) logic  \///@0$sel_digit ;
-               assign \///@0$sel_digit = FpgaPins_Fpga_COUNT_sel_digit_a0;
-               (* keep *) logic [6:0] \///@0$tens ;
-               assign \///@0$tens = FpgaPins_Fpga_COUNT_tens_a0;
             end
          end
       end
@@ -265,11 +250,11 @@ logic [6:0] FpgaPins_Fpga_COUNT_tens_a0;
                      assign FpgaPins_Fpga_COUNT_reset_a0 = reset;
             
                      assign FpgaPins_Fpga_COUNT_cntbtn_a0[3:0] = ui_in[0];
-                     assign FpgaPins_Fpga_COUNT_cnt_a0[3:0] = FpgaPins_Fpga_COUNT_reset_a0 ? 0 : (FpgaPins_Fpga_COUNT_cnt_a1 + ui_in[0]);
+                     assign FpgaPins_Fpga_COUNT_cnt_a0[3:0] = FpgaPins_Fpga_COUNT_cnt_a1 + ui_in[0] ;
                      assign FpgaPins_Fpga_COUNT_btn_a0[3:0] = ui_in[3:1];
-                     assign FpgaPins_Fpga_COUNT_sel_digit_a0 = clk;
-                     assign FpgaPins_Fpga_COUNT_tens_a0[6:0] = 7'b0000110;
-                     assign FpgaPins_Fpga_COUNT_ones_a0[6:0] = 7'b1001111;
+                     //$sel_digit = *clk;
+                     //$tens[6:0] = 7'b0000110;
+                     //$ones[6:0] = 7'b1001111;
                      assign FpgaPins_Fpga_COUNT_digit_a0[3:0] = FpgaPins_Fpga_COUNT_cnt_a0[3:0];
                      assign uo_out[7:0] =
                                 FpgaPins_Fpga_COUNT_digit_a0 == 4'h0
