@@ -21,7 +21,7 @@ module top(input logic clk, input logic reset, input logic [31:0] cyc_cnt, outpu
    logic [7:0] ui_in, uo_out;
    
    logic [31:0] r;  // a random value
-   always @(posedge clk) r <= $urandom();
+   always @(posedge clk) r <= 0;
    //assign ui_in = r[7:0];
   // 
    logic ena = 1'b0;
@@ -237,7 +237,7 @@ module tt_um_template (
                         FpgaPins_Fpga_TIME_time_clk_a1 ? 0 :
                         (1 + FpgaPins_Fpga_TIME_cnt_a1);
                      //time_clk counts the num of cycles equal to 0.1s
-                     assign FpgaPins_Fpga_TIME_time_clk_a0 = (FpgaPins_Fpga_TIME_cnt_a0 == 21'b10);
+                     assign FpgaPins_Fpga_TIME_time_clk_a0 = (FpgaPins_Fpga_TIME_cnt_a0 == 21'b111101000010010000000);
             
                      // 100 in binary 1100100
                      assign FpgaPins_Fpga_TIME_sec_cnt_a0[3:0] =
